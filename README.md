@@ -292,8 +292,96 @@ Rear:  -1
 ```
 
 
+### Linked List Representation of Queue   
+
+✅ Queue using Linked List has O(1) time complexity for enqueue() and dequeue(), unlike an array-based queue which may require shifting elements.
+✅ A real linked list allows insertions/deletions anywhere, whereas a queue restricts operations to front & rear.
+✅ Queue with Linked List is useful for dynamic-sized data, preventing fixed-size limitations of array queues.
 
 
+```cpp
+#include <iostream>
+
+using namespace std;
+
+// Node structure for the linked list
+struct Node {
+    int data;      // Data stored in the node
+    Node* next;    // Pointer to the next node
+};
+
+// Queue operations using linked list
+Node* front = nullptr;  // Pointer to front of queue
+Node* rear = nullptr;   // Pointer to rear of queue
+
+// Function to enqueue (insert) an element at the rear
+void enqueue(int value) {
+    Node* newNode = new Node(); // Allocate memory for new node
+    newNode->data = value;
+    newNode->next = nullptr;
+
+    if (rear == nullptr) {  // If queue is empty
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;  // Link the last node to the new node
+        rear = newNode;        // Update rear to the new node
+    }
+    cout << value << " enqueued into queue." << endl;
+}
+
+// Function to dequeue (remove) an element from the front
+void dequeue() {
+    if (front == nullptr) {  // If queue is empty
+        cout << "Queue Underflow! Cannot dequeue." << endl;
+        return;
+    }
+
+    Node* temp = front;  // Temporary pointer to hold the front node
+    front = front->next; // Move front to next node
+
+    if (front == nullptr) { // If the queue becomes empty
+        rear = nullptr;
+    }
+
+    cout << temp->data << " dequeued from queue." << endl;
+    delete temp;  // Free memory of removed node
+}
+
+// Function to display queue elements
+void printQueue() {
+    if (front == nullptr) {
+        cout << "Queue is empty!" << endl;
+        return;
+    }
+
+    Node* temp = front;
+    cout << "Queue elements: ";
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+
+    printQueue(); // Display elements
+
+    dequeue();
+    printQueue();
+
+    dequeue();
+    printQueue();
+
+    dequeue();
+    printQueue(); // Queue should now be empty
+
+    return 0;
+}
+```
 
 
 
