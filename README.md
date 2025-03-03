@@ -245,7 +245,7 @@ int main() {
 }
 ```
 
-# visual representation of the array-based queue
+visual representation of the array-based queue
 ```bash
 # Initial State (Empty Queue)
 Index:  0   1   2   3   4
@@ -383,16 +383,38 @@ int main() {
 }
 ```
 
+Visual Representation of Queue using Linked List
+```cpp
+# Initially, the Queue is Empty
+# Both front and rear pointers are NULL.
+(front) NULL
+(rear)  NULL
 
+# Enqueue(1) insert 1 into the queue.
+#  A new node is created: |1|NULL| and the queue was empty, both front and rear now point to the same node. 
+(front) -> | 1 | NULL | <- (rear)
 
+# Enqueue(2) insert 2 at the rear
+# The rear->next points to the new node and rear is updated to the new node.
+(front) -> | 1 | next | -> | 2 | NULL | <- (rear)
 
+# Enqueue(3) insert 3 at the rear.
+# The rear->next points to the new node and rear is updated to the new node.
+(front) -> | 1 | next | -> | 2 | next | -> | 3 | NULL | <- (rear)
+    
+# Dequeue() → Remove 1 emove the front element (1)
+#  front moves to the next node (2) and rear remains unchanged.  
+(front) -> | 2 | next | -> | 3 | NULL | <- (rear)
 
+# Dequeue() → Remove 2 remove the front element (2)
+# front moves to the next node (3) and rear remains unchanged.
+(front) -> | 3 | NULL | <- (rear)
 
-
-
-
-
-
+# Dequeue() → Remove 3 (Queue Becomes Empty) remove the last element (3).
+# front and rear both become NULL and the queue is now empty.  
+(front) NULL
+(rear)  NULL
+```
 
 # Stack Data Structures in cpp   
 
