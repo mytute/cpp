@@ -150,6 +150,162 @@ int main() {
 ```
 
 
+### Array Representation of Queue     
+
+Key Observations   
+* Elements are added at the rear (right side).   
+* Elements are removed from the front (left side).  
+* No shifting is needed! We only move pointers.  
+* Once the queue is empty, front = rear = -1.  
+
+when push new value to queue-array it 
+```cpp
+void enqueue(int value) {
+    if (isFull()) {
+        cout << "Queue Overflow! Cannot enqueue " << value << endl;
+        return;
+    }
+    if (isEmpty()) front = 0;  // Set front to 0 if first element is added
+    queue[++rear] = value;  // Increment rear and insert element
+    cout << value << " enqueued." << endl;
+}
+```
+
+```cpp
+#include <iostream>
+using namespace std;
+
+#define SIZE 5  // Define the maximum size of the queue
+
+int queue[SIZE];  // Array to store queue elements
+int front = -1, rear = -1;  // Initialize front and rear pointers
+
+// Function to check if the queue is empty
+bool isEmpty() {
+    return front == -1;
+}
+
+// Function to check if the queue is full
+bool isFull() {
+    return rear == SIZE - 1;
+}
+
+// Function to add an element to the queue
+void enqueue(int value) {
+    if (isFull()) {
+        cout << "Queue Overflow! Cannot enqueue " << value << endl;
+        return;
+    }
+    if (isEmpty()) front = 0;  // Set front to 0 if first element is added
+    queue[++rear] = value;  // Increment rear and insert element
+    cout << value << " enqueued." << endl;
+}
+
+// Function to remove an element from the queue
+void dequeue() {
+    if (isEmpty()) {
+        cout << "Queue Underflow! Cannot dequeue." << endl;
+        return;
+    }
+    cout << queue[front] << " dequeued." << endl;
+    if (front == rear) {  // Reset queue if last element is dequeued
+        front = rear = -1;
+    } else {
+        front++;  // Move front to the next element
+    }
+}
+
+// Function to print the queue elements
+void printQueue() {
+    if (isEmpty()) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+    cout << "Queue elements: ";
+    for (int i = front; i <= rear; i++) {
+        cout << queue[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+
+    printQueue();  // Print queue elements
+
+    dequeue();
+    printQueue();
+
+    cout << "Front element: " << (isEmpty() ? -1 : queue[front]) << endl;
+    cout << "Rear element: " << (isEmpty() ? -1 : queue[rear]) << endl;
+
+    return 0;
+}
+```
+
+# visual representation of the array-based queue
+```bash
+# Initial State (Empty Queue)
+Index:  0   1   2   3   4
+Queue: [ ] [ ] [ ] [ ] [ ] 
+Front: -1
+Rear:  -1
+
+# After enqueue(1)
+Index:  0   1   2   3   4
+Queue: [1] [ ] [ ] [ ] [ ] 
+Front:  0
+Rear:   0
+
+# After enqueue(2)
+Index:  0   1   2   3   4
+Queue: [1] [2] [ ] [ ] [ ] 
+Front:  0
+Rear:   1
+
+# After enqueue(3)
+Index:  0   1   2   3   4
+Queue: [1] [2] [3] [ ] [ ] 
+Front:  0
+Rear:   2
+
+# After dequeue()
+Index:  0   1   2   3   4
+Queue: [1] [2] [3] [ ] [ ] 
+Front:  1
+Rear:   2
+
+# After dequeue() Again  
+Index:  0   1   2   3   4
+Queue: [1] [2] [3] [ ] [ ] 
+Front:  2
+Rear:   2
+
+# When Queue is Empty (After More Dequeues)
+Index:  0   1   2   3   4
+Queue: [1] [2] [3] [ ] [ ] 
+Front: -1
+Rear:  -1
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Stack Data Structures in cpp   
 
 Stack is type of data collection which use LIFO (last in first out)/ FILO(first in last out) technique in order to store elements 
@@ -370,7 +526,47 @@ int main() {
 
 here we are discussin about single link-list (data-address)     
 
+Why Use a Linked List for Stack?    
+* Dynamic Size – Unlike arrays, linked lists do not require a fixed size.
+* Efficient Insert/Delete – Inserting and deleting elements at the top is O(1).
+* No Memory Waste – Uses only as much memory as needed.
 
+
+In a standard singly linked list, new elements are typically appended at the end (tail), linking nodes forward.
+However, in a stack implemented using a linked list, new elements are always inserted at the head (top), linking nodes backward. This ensures a Last In, First Out (LIFO) behavior, where the last inserted element is always at the top.
+```cpp
+/* normal linked list  */
+// |data|100| -> |data|101| -> |data|null|
+
+/* linked list used here */
+// |data|null| -> |data|100| -> |data|101|
+
+void push(int value) {
+    Node* newNode = new Node;  // Create a new node dynamically
+    newNode->data = value;     // Assign value to the node
+    newNode->next = topNode;   // Link the new node to the current top
+    topNode = newNode;         // Update topNode to new node
+    cout << value << " pushed to stack." << endl;
+}
+```
+
+When removing an element from the stack, we always remove the top node (head of the linked list).   
+The topNode is updated to point to the next node in the stack, effectively removing the current top element.    
+Since we are always removing from the top, the time complexity remains O(1).   
+```cpp
+void pop() {
+    if (topNode == nullptr) {
+        cout << "Stack Underflow! Cannot pop from an empty stack." << endl;
+        return;
+    }
+    Node* temp = topNode;  // Temporary pointer to the top node
+    cout << topNode->data << " popped from stack." << endl;
+    topNode = topNode->next;  // Move topNode to the next node
+    delete temp;  // Delete the old top node
+}
+```
+  
+following code show Linked List implementation of stack
 ```cpp
 #include <iostream>
 
