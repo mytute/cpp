@@ -294,9 +294,9 @@ Rear:  -1
 
 ### Linked List Representation of Queue   
 
-✅ Queue using Linked List has O(1) time complexity for enqueue() and dequeue(), unlike an array-based queue which may require shifting elements.
-✅ A real linked list allows insertions/deletions anywhere, whereas a queue restricts operations to front & rear.
-✅ Queue with Linked List is useful for dynamic-sized data, preventing fixed-size limitations of array queues.
+✅ Queue using Linked List has O(1) time complexity for enqueue() and dequeue(), unlike an array-based queue which may require shifting elements.   
+✅ A real linked list allows insertions/deletions anywhere, whereas a queue restricts operations to front & rear.   
+✅ Queue with Linked List is useful for dynamic-sized data, preventing fixed-size limitations of array queues.   
 
 
 ```cpp
