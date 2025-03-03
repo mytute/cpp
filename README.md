@@ -758,7 +758,31 @@ int main() {
 }
 ```
  
+* synonym: similar and opposite words  
+* Why is this O(1)?   
 
+✅ No loops or shifting required when adding or removing elements.  
+✅ Only pointer updates (constant time operation).  
+✅ Does not depend on the number of elements in the queue.   
+
+* nullptr in C++  
+nullptr is a special keyword in C++ introduced in C++11 to represent a null pointer. It replaces the older NULL macro used in C.
+
+* Macro Definition in C++
+  A macro definition in C++ is a way to define constants or small reusable code snippets using the #define directive. Macros are preprocessor directives, meaning they are processed before the actual compilation of the program.
+```cpp
+#include <iostream>
+#define PI 3.14159  // Defining a constant macro
+#define SQUARE(x) ((x) * (x))  // Defining a function-like macro
+
+using namespace std;
+
+int main() {
+    cout << "Value of PI: " << PI << endl;
+    cout << "Square of 5: " << SQUARE(5) << endl;
+    return 0;
+}
+```
 
 
 
